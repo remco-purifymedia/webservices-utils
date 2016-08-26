@@ -1,0 +1,43 @@
+{
+  "name": "webservices-nl/utils",
+  "description": "Webservices Utils library with all purpose functions (array, string, entity, json)",
+  "keywords": [
+    "utils",
+    "webservicesnl",
+    "webservices.nl"
+  ],
+  "license": "MIT",
+  "type": "library",
+  "authors": [
+    {
+      "name": "WebservicesNl",
+      "email": "tech@webservices.nl",
+      "homepage": "https://webservices.nl"
+    }
+  ],
+  "prefer-stable": true,
+  "config": {
+    "gitlab-domains": [
+      "gitlab.fdmg.org"
+    ],
+    "preferred-install": "dist"
+  },
+  "require": {
+    "php": "^5.4 || ^7"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^5",
+    "phpro/grumphp": "^0.8.0",
+    "friendsofphp/php-cs-fixer": "^1"
+  },
+  "autoload": {
+    "psr-4": {
+      "WebservicesNl\\Utils\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "WebservicesNl\\Utils\\Test\\": "test/"
+    }
+  }
+}

@@ -1,0 +1,117 @@
+# grumphp.yml
+# @see https://github.com/phpro/grumphp/tree/master/doc/tasks
+parameters:
+    bin_dir: "./vendor/bin"
+    git_dir: "."
+    stop_on_failure: false
+    ignore_unstaged_changes: true
+    ascii:
+        failed: grumphp-grumpy.txt
+        succeeded: grumphp-happy.txt
+    tasks:
+        composer:
+          with_dependencies: false
+          strict: true
+        git_blacklist:
+          keywords:
+              - "die("
+              - "var_dump("
+              - "exit;"
+              - "print("
+              - "print_r("
+        git_commit_message:
+          matchers:
+              - /WSNL-([0-9]+)/
+          case_insensitive: false
+        jsonlint:
+           detect_key_conflicts: true
+        phpcsfixer:
+          fixers:
+            - psr0
+            - encoding
+            - short_tag
+            - braces
+            - class_definition
+            - elseif
+            - eof_ending
+            - function_call_space
+            - function_declaration
+            - indentation
+            - line_after_namespace
+            - linefeed
+            - lowercase_constants
+            - lowercase_keywords
+            - method_argument_space
+            - multiple_use
+            - parenthesis
+            - php_closing_tag
+            - single_line_after_imports
+            - switch_case_semicolon_to_colon
+            - switch_case_space
+            - trailing_spaces
+            - visibility
+            - blankline_after_open_tag
+            - double_arrow_multiline_whitespaces
+            - duplicate_semicolon
+            - empty_return
+            - extra_empty_lines
+            - function_typehint_space
+            - hash_to_slash_comment
+            - join_function
+            - list_commas
+            - lowercase_cast
+            - method_argument_default_value
+            - namespace_no_leading_whitespace
+            - no_empty_lines_after_phpdocs
+            - object_operator
+            - operators_spaces
+            - phpdoc_indent
+            - phpdoc_inline_tag
+            - phpdoc_no_access
+            - phpdoc_no_package
+            - phpdoc_params
+            - phpdoc_scalar
+            - print_to_echo
+            - return
+            - self_accessor
+            - short_bool_cast
+            - short_scalar_cast
+            - single_array_no_trailing_comma
+            - single_blank_line_before_namespace
+            - single_quote
+            - spaces_after_semicolon
+            - spaces_before_semicolon
+            - spaces_cast
+            - standardize_not_equal
+            - ternary_spaces
+            - trim_array_spaces
+            - unary_operators_spaces
+            - unneeded_control_parentheses
+            - whitespacy_lines
+            - concat_with_spaces
+            - multiline_spaces_before_semicolon
+            - native_function_casing
+            - newline_after_open_tag
+            - ordered_use
+            - short_echo_tag
+            - array_element_no_space_before_comma
+            - heredoc_to_nowdoc
+            - new_with_braces
+            - header_comment
+            - include
+            - remove_lines_between_uses
+            - array_element_white_space_after_comma
+            - phpdoc_no_empty_return
+            - phpdoc_separation
+            - short_array_syntax
+            - unalign_equals
+            - unalign_double_arrow
+            - php4_constructor
+        phpunit: ~
+        xmllint:
+          load_from_net: true
+          x_include: true
+          scheme_validation: true
+        yamllint:
+          exception_on_invalid_type: true
+    extensions: []
