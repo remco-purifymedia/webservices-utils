@@ -23,12 +23,15 @@
     "preferred-install": "dist"
   },
   "require": {
-    "php": "^5.4 || ^7"
+    "php": "^5.4 || ^7",
+    "ddeboer/transcoder": "^1.0"
   },
   "require-dev": {
     "phpunit/phpunit": "^5",
     "phpro/grumphp": "^0.8.0",
-    "friendsofphp/php-cs-fixer": "^1"
+    "friendsofphp/php-cs-fixer": "^1",
+    "league/factory-muffin-faker": "^2.0",
+    "league/factory-muffin": "^3.0"
   },
   "autoload": {
     "psr-4": {

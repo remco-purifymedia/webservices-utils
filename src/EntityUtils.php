@@ -3,12 +3,12 @@
 namespace WebservicesNl\Utils;
 
 /**
- * Class EntityUtils
+ * Class EntityUtils.
  */
 class EntityUtils
 {
     /**
-     * Extract the value of a property from an entity
+     * Extract the value of a property from an entity.
      *
      * @param mixed  $entity
      * @param string $property
