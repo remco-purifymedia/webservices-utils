@@ -1,3 +1,4 @@
+ansible/
 vendor/
 /.idea/
 phpunit.xml

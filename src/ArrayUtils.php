@@ -4,23 +4,25 @@ namespace WebservicesNl\Utils;
 
 /**
  * Class ArrayUtils.
- *
  */
 class ArrayUtils
 {
     /**
+     * Explode an array on string.
+     *
      * @param array  $array
      * @param string $explodeOn
-     * @param int    $limit
+     * @param int    $limit     |null
      *
      * @return array
      */
-    public function explodeArrayOnKeys($array, $explodeOn, $limit)
+    public static function explodeArrayOnKeys($array, $explodeOn, $limit = null)
     {
         $result = [];
         foreach ($array as $path => $value) {
             $temp = &$result;
-            foreach (explode($explodeOn, $path, $limit) as $key) {
+            $tempArray = ($limit === null) ? explode($explodeOn, $path) : explode($explodeOn, $path, $limit);
+            foreach ($tempArray as $key) {
                 $temp = &$temp[$key];
             }
             $temp = $value;
@@ -61,6 +63,8 @@ class ArrayUtils
     }
 
     /**
+     * Filter an array key.
+     *
      * @param array  $array
      * @param string $value
      *
@@ -68,9 +72,13 @@ class ArrayUtils
      */
     public static function filterArrayOnKey(array $array, $value)
     {
-        return array_filter($array, function ($key) use ($value) {
-            return strpos($key, $value) === 0;
-        }, ARRAY_FILTER_USE_KEY);
+        return array_filter(
+            $array,
+            function ($key) use ($value) {
+                return strpos($key, $value) === 0;
+            },
+            ARRAY_FILTER_USE_KEY
+        );
     }
 
     /**
@@ -84,6 +92,7 @@ class ArrayUtils
         $resultArray = [];
         foreach ($array as $key => $val) {
             if (is_array($val)) {
+                /** @noinspection AdditionOperationOnArraysInspection */
                 $resultArray += self::prefixArray(self::flattenArray($val), $key, $separator);
             } else {
                 $resultArray[$key] = $val;
@@ -138,41 +147,28 @@ class ArrayUtils
     }
 
     /**
-     * Reindex the most nested element in an array.
-     *
-     * @param array $values
-     * @param int   $index
-     *
-     * @return array
-     */
-    public static function reindexNestedElementInArray(array $values, $index)
-    {
-        $depth = static::calculateArrayDepth($values);
-        $result = [];
-        if ($depth === 1) {
-            $result[$index] = $values;
-        } else {
-            $result[key($values)] = static::reindexNestedElementInArray(current($values), $index);
-        }
-
-        return $result;
-    }
-
-    /**
      * Calculate the depth of an array.
+     * Be aware of array with references to other places in the same array. This can cause memory exhaustion.
      *
      * @param array $array
+     * @param bool  $deReference deReference should the array values be de-referenced first?
      *
      * @return int
+     *
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
-    public static function calculateArrayDepth(array $array)
+    public static function calculateArrayDepth(array $array, $deReference = false)
     {
-        $maxDepth = 1;
+        if ($deReference === true) {
+            /** @var array $array */
+            $array = unserialize(serialize($array));
+        }
 
+        $maxDepth = 1;
         foreach ($array as $value) {
             if (is_array($value)) {
                 $depth = static::calculateArrayDepth($value) + 1;
-
                 if ($depth > $maxDepth) {
                     $maxDepth = $depth;
                 }
@@ -183,43 +179,40 @@ class ArrayUtils
     }
 
     /**
-     * Trim all the string in the array.
+     * Merge two arrays together (kinda). And a bit of replace.
+     * Copy the values of source array into the target array, when the keys are numerical .
+     * this function is scheduled for replacement, please use array_merge or array_replace.
      *
-     * @param array $strings
-     *
-     * @return array
-     */
-    public static function trimArray(array $strings)
-    {
-        return array_map('trim', $strings);
-    }
-
-    /**
-     * @param array $a
-     * @param array $b
+     * @param array $targetArray   targetArray
+     * @param array $sourceArray   sourceArray
      * @param bool  $combineUnique
      *
+     * @deprecated please use array_merge or array_replace
+     *
      * @return array
      */
-    public static function mergeRecursive(array $a, array $b, $combineUnique = true)
+    public static function mergeRecursive(array $targetArray, array $sourceArray, $combineUnique = true)
     {
-        foreach ($b as $key => $value) {
-            if (array_key_exists($key, $a)) {
+        // check for each key in source array if it is present in the target array
+        foreach ($sourceArray as $key => $value) {
+            if (array_key_exists($key, $targetArray)) {
                 if (is_int($key)) {
-                    if (false === $combineUnique || false === in_array($value, $a, true)) {
-                        $a[] = $value;
+                    if ($combineUnique === false || !in_array($value, $targetArray, true)) {
+                        $targetArray[] = $value;
                     }
-                } elseif (is_array($value) && is_array($a[$key])) {
-                    $a[$key] = static::mergeRecursive($a[$key], $value, $combineUnique);
+                } elseif (is_array($value) && is_array($targetArray[$key])) {
+                    $targetArray[$key] = static::mergeRecursive($targetArray[$key], $value, $combineUnique);
                 } else {
-                    $a[$key] = $value;
+                    // replace key
+                    $targetArray[$key] = $value;
                 }
             } else {
-                $a[$key] = $value;
+                // replace key
+                $targetArray[$key] = $value;
             }
         }
 
-        return $a;
+        return $targetArray;
     }
 
     /**

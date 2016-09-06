@@ -2,69 +2,13 @@
 
 namespace WebservicesNl\Utils;
 
+use Ddeboer\Transcoder\Transcoder;
+
 /**
- * Class StringUtils
- *
+ * Class StringUtils.
  */
 class StringUtils
 {
-    /**
-     * Format string with the number of seconds (from milliseconds)
-     *
-     * @param int $microseconds Time in microseconds
-     *
-     * @return string
-     */
-    public static function formatDuration($microseconds)
-    {
-        return $microseconds / 1000 . ' s';
-    }
-
-    /**
-     * Return a formatted string (from bytes) in decimal or binary
-     *
-     * @param int|string $size
-     * @param int        $precision
-     * @param string     $format    either binary or decimal
-     *
-     * @return string
-     */
-    public static function formatBytes($size, $precision = 2, $format = 'binary')
-    {
-        $formats = [
-            'decimal' => [ // IEC prefixes (binary)
-                'units' => ['B', 'kB', 'MB', 'GB', 'TB', 'PB'],
-                'mod' => 1000
-            ],
-            'binary' => [ // SI prefixes (decimal)
-                'units' => ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB'],
-                'mod' => 1024
-            ]
-        ];
-
-        $format = (!array_key_exists($format, $formats)) ? 'binary' : $format;
-        $format = $formats[$format];
-
-        /** @var float $base */
-        $base = log((float) $size, $format['mod']);
-        $key = (int) floor($base);
-
-        return round(pow(1024, $base - floor($base)), $precision) . ' ' . $format['units'][$key];
-    }
-
-    /**
-     * Determine if a string (haystack) starts and ends with a certain sequence (needle).
-     *
-     * @param $haystack
-     * @param $needle
-     *
-     * @return bool
-     */
-    public static function isStringSurroundedBy($haystack, $needle)
-    {
-        return static::stringEndsWith($haystack, $needle) && static::stringStartsWith($haystack, $needle);
-    }
-
     /**
      * Determine if a string ends with a particular sequence.
      *
@@ -72,9 +16,15 @@ class StringUtils
      * @param string $needle
      *
      * @return bool
+     *
+     * @throws \InvalidArgumentException
      */
     public static function stringEndsWith($haystack, $needle)
     {
+        if (!is_string($haystack) || !is_string($needle)) {
+            throw new \InvalidArgumentException('Not a string');
+        }
+
         return (strrpos($haystack, $needle) + strlen($needle)) === strlen($haystack);
     }
 
@@ -85,22 +35,34 @@ class StringUtils
      * @param string $needle
      *
      * @return bool
+     *
+     * @throws \InvalidArgumentException
      */
     public static function stringStartsWith($haystack, $needle)
     {
+        if (!is_string($haystack) || !is_string($needle)) {
+            throw new \InvalidArgumentException('Not a string');
+        }
+
         return strpos($haystack, $needle) === 0;
     }
 
     /**
-     * Remove the prefix from the provided string
+     * Remove the prefix from the provided string.
      *
      * @param string $haystack
      * @param string $prefix
      *
      * @return string
+     *
+     * @throws \InvalidArgumentException
      */
     public static function removePrefix($haystack, $prefix)
     {
+        if (!is_string($haystack) || !is_string($prefix)) {
+            throw new \InvalidArgumentException('Not a string');
+        }
+
         if (strpos($haystack, $prefix) === 0) {
             $haystack = substr($haystack, strlen($prefix));
         }
@@ -109,34 +71,88 @@ class StringUtils
     }
 
     /**
-     * Convert strings with underscores into CamelCase (for getters and setters)
+     * Convert strings with underscores into CamelCase (for getters and setters).
      *
      * @param string $string        The string to convert
      * @param bool   $firstCharCaps camelCase or CamelCase
      *
      * @return string The converted string
+     *
+     * @throws \Ddeboer\Transcoder\Exception\UnsupportedEncodingException
+     * @throws \Ddeboer\Transcoder\Exception\ExtensionMissingException
+     * @throws \InvalidArgumentException
      */
-    public static function underscoreToCamelCase($string, $firstCharCaps = true)
+    public static function toCamelCase($string, $firstCharCaps = true)
     {
+        if (!is_string($string)) {
+            throw new \InvalidArgumentException('Not a string');
+        }
+
+        $transcoder = Transcoder::create();
+        $string = $transcoder->transcode($string);
+
         if ($firstCharCaps === true) {
             $string = ucfirst($string);
         }
 
-        return preg_replace_callback('/_([a-z])/', function ($string) {
-            return strtoupper($string[1]);
-        }, $string);
+        return preg_replace_callback(
+            '/_\?([a-z])/',
+            function ($string) {
+                return strtoupper($string[1]);
+            },
+            $string
+        );
     }
 
     /**
-     * A (possibly) better check on numeric string compared to the default PHP one, since it should detect also comma
-     * separated values
+     * Internal function for toUnderscore.
      *
-     * @param string $value
+     * @param string $word
      *
-     * @return bool
+     * @return string
+     *
+     * @throws \InvalidArgumentException
      */
-    public static function isNumeric($value)
+    private static function wordToUnderscored($word)
     {
-        return preg_match('/^(-){0,1}([\d]+)(,[\d]{3})*([.][\d]){0,1}([\d]*)$/', $value) === 1;
+        return strtolower(
+            trim(
+                preg_replace(
+                    '~[^a-z^\d]+~i',
+                    '_',
+                    preg_replace(
+                        '~([a-z])([A-Z])~',
+                        '\1_\2',
+                        preg_replace('~([A-Z]+)([A-Z][a-z])~', '\1_\2', $word)
+                    )
+                ),
+                '_'
+            )
+        );
+    }
+
+    /**
+     * Converts a string to underscore version.
+     * Also tries to filter out higher UTF-8 chars
+     *
+     * @param string $string
+     *
+     * @return string
+     *
+     * @throws \Ddeboer\Transcoder\Exception\UnsupportedEncodingException
+     * @throws \Ddeboer\Transcoder\Exception\ExtensionMissingException
+     * @throws \InvalidArgumentException
+     */
+    public static function toUnderscore($string)
+    {
+        if (!is_string($string)) {
+            throw new \InvalidArgumentException('Not a string');
+        }
+
+        $transcoder = Transcoder::create('ASCII');
+        $string = $transcoder->transcode(trim($string));
+        $words = explode(' ', $string);
+
+        return implode('_', array_filter(array_map([static::class, 'wordToUnderscored'], $words)));
     }
 }
