@@ -26,7 +26,7 @@ class EntityUtilsTest extends \PHPUnit_Framework_TestCase
         static::$fm = new FactoryMuffin();
 
         // load your model definitions
-        static::$fm->loadFactories(__DIR__ . '/factories');
+        static::$fm->loadFactories(__DIR__ . '/Factories');
 
         // you can optionally set the faker locale
         Faker::setLocale('nl_NL');
@@ -103,7 +103,7 @@ class EntityUtilsTest extends \PHPUnit_Framework_TestCase
     {
         // create a new factory muffin instance
         $fm = new FactoryMuffin();
-        $fm->loadFactories(__DIR__ . '/factories');
+        $fm->loadFactories(__DIR__ . '/Factories');
 
         // you can optionally set the faker locale
         Faker::setLocale('nl_NL');
