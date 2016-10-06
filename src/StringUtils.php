@@ -10,6 +10,24 @@ use Ddeboer\Transcoder\Transcoder;
 class StringUtils
 {
     /**
+     * @param string $filename
+     * @param bool   $lowercase
+     *
+     * @return string
+     *
+     * @throws \InvalidArgumentException
+     */
+    public static function getFileExtension($filename, $lowercase = true)
+    {
+        if (false === is_string($filename)) {
+            throw new \InvalidArgumentException(sprintf('Filename must be a string, %s given', gettype($filename)));
+        }
+        $extension = pathinfo($filename, PATHINFO_EXTENSION);
+
+        return $lowercase ? strtolower($extension) : $extension;
+    }
+
+    /**
      * Determine if a string ends with a particular sequence.
      *
      * @param string $haystack
@@ -133,7 +151,7 @@ class StringUtils
 
     /**
      * Converts a string to underscore version.
-     * Also tries to filter out higher UTF-8 chars
+     * Also tries to filter out higher UTF-8 chars.
      *
      * @param string $string
      *
@@ -149,8 +167,8 @@ class StringUtils
             throw new \InvalidArgumentException('Not a string');
         }
 
-        $transcoder = Transcoder::create('ASCII');
-        $string = $transcoder->transcode(trim($string));
+        $transCoder = Transcoder::create('ASCII');
+        $string = $transCoder->transcode(trim($string));
         $words = explode(' ', $string);
 
         return implode('_', array_filter(array_map([static::class, 'wordToUnderscored'], $words)));

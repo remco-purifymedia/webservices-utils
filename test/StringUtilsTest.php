@@ -10,11 +10,6 @@ use WebservicesNl\Utils\StringUtils;
 class StringUtilsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var FactoryMuffin
-     */
-    protected static $fm;
-
-    /**
      * @dataProvider stringExamples
      *
      * @param array $item
@@ -93,7 +88,7 @@ class StringUtilsTest extends \PHPUnit_Framework_TestCase
     public function dataTypes()
     {
         return [
-            [new \DateTime(), 'string'], [[], 'string'], [(bool)1, 'string'], [new \stdClass(), 'string']
+            [new \DateTime(), 'string'], [[], 'string'], [(bool) 1, 'string'], [new \stdClass(), 'string']
         ];
     }
 
@@ -195,5 +190,58 @@ class StringUtilsTest extends \PHPUnit_Framework_TestCase
 
         self::assertStringStartsNotWith($item['startsWith'], $trimmed);
         self::assertStringStartsWith($trimmed, $trimmed);
+    }
+
+    /**
+     * Some successful cases.
+     *
+     * @dataProvider validFilenameProvider
+     *
+     * @param string $filename
+     * @param string $expectedValue
+     */
+    public function testSomeCorrectCases($filename, $expectedValue)
+    {
+        static::assertSame(StringUtils::getFileExtension($filename), $expectedValue);
+    }
+
+    /**
+     * Test case with some invalid inputs.
+     *
+     * @dataProvider invalidFilenameProvider
+     * @expectedException \InvalidArgumentException
+     *
+     * @param mixed $input
+     */
+    public function testInvalidInputs($input)
+    {
+        StringUtils::getFileExtension($input);
+    }
+
+    /**
+     * @return array
+     */
+    public function validFilenameProvider()
+    {
+        return [
+            ['folder1/folder2/file.BMP', 'bmp'],
+            ['folder1/folder2/file.part2.abc', 'abc'],
+            ['file.12345', '12345'],
+            ['filename', '']
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function invalidFilenameProvider()
+    {
+        return [
+            [null],
+            [1234],
+            [new \stdClass()],
+            [true],
+            [-6.5]
+        ];
     }
 }
