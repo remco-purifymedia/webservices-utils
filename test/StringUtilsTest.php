@@ -1,6 +1,6 @@
 <?php
 
-namespace WebservicesNl\Utils\test;
+namespace WebservicesNl\Utils\Test;
 
 use WebservicesNl\Utils\StringUtils;
 

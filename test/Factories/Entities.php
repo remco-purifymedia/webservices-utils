@@ -2,7 +2,7 @@
 
 use League\FactoryMuffin\Faker\Facade as Faker;
 
-/** @var League\FactoryMuffin\FactoryMuffin $fm */
+/** @var \League\FactoryMuffin\FactoryMuffin $fm */
 $fm->define(\WebservicesNl\Utils\Test\Entities\Geocode::class)->setDefinitions(
     [
         'longitude' => Faker::longitude(),
