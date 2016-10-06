@@ -160,7 +160,7 @@ class Address extends DummyClass
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isValid()
     {
@@ -168,7 +168,7 @@ class Address extends DummyClass
     }
 
     /**
-     * @param boolean $valid
+     * @param bool $valid
      */
     public function setValid($valid)
     {

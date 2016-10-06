@@ -26,9 +26,10 @@ class FormatUtils
      *
      * @param int|string|float $size
      * @param int              $precision
-     * @param string           $format either binary or decimal
+     * @param string           $format    either binary or decimal
      *
      * @return string
+     *
      * @throws \InvalidArgumentException
      */
     public static function formatBytes($size, $precision = 0, $format = 'decimal')
@@ -38,11 +39,11 @@ class FormatUtils
         }
 
         $format = self::$formats[$format];
-        $precision = (int)$precision;
+        $precision = (int) $precision;
 
         /** @var float $base */
-        $base = log((float)$size, $format['mod']);
-        $key = (int)floor($base);
+        $base = log((float) $size, $format['mod']);
+        $key = (int) floor($base);
 
         $value = round(pow($format['mod'], $base - floor($base)), $precision);
 

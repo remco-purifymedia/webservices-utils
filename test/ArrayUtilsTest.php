@@ -7,7 +7,7 @@ use League\FactoryMuffin\Faker\Facade as Faker;
 use WebservicesNl\Utils\ArrayUtils;
 
 /**
- * Class ArrayUtilsTest
+ * Class ArrayUtilsTest.
  */
 class ArrayUtilsTest extends \PHPUnit_Framework_TestCase
 {
@@ -17,7 +17,7 @@ class ArrayUtilsTest extends \PHPUnit_Framework_TestCase
     protected static $fm;
 
     /**
-     * Test flatten Array
+     * Test flatten Array.
      */
     public function testFlattenArray()
     {
@@ -26,15 +26,15 @@ class ArrayUtilsTest extends \PHPUnit_Framework_TestCase
         $flatArray = ArrayUtils::flattenArray($project->toArray());
 
         // check if each value is present in the flat array
-        self::assertValueInNestedArray($flatArray);
+        return self::assertValueInNestedArray($flatArray);
     }
 
     /**
-     * Helper function
+     * Helper function.
      *
      * @param array $array
      *
-     * @return mixed
+     * @return bool
      */
     public static function assertValueInNestedArray(array $array)
     {
@@ -44,10 +44,11 @@ class ArrayUtilsTest extends \PHPUnit_Framework_TestCase
             }
             self::assertContains($value, $array);
         }
+        return true;
     }
 
     /**
-     * Test flatten Array
+     * Test flatten Array.
      */
     public function testExplodeArrayOnKeys()
     {
@@ -64,7 +65,7 @@ class ArrayUtilsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     *  test if array associative or numerical (starting from 0, 1, 2..)
+     * Test if array associative or numerical (starting from 0, 1, 2..).
      */
     public function testArrayIsAssociative()
     {
@@ -80,7 +81,7 @@ class ArrayUtilsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test the depth of an 'normal' array
+     * Test the depth of an 'normal' array.
      */
     public function testArrayDepth()
     {
@@ -107,7 +108,7 @@ class ArrayUtilsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test filter array on key
+     * Test filter array on key.
      */
     public function testFilterArrayOnKey()
     {
@@ -118,7 +119,7 @@ class ArrayUtilsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test Array merge recursive
+     * Test Array merge recursive.
      */
     public function testArrayMerge()
     {
@@ -162,7 +163,7 @@ class ArrayUtilsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test the depth the array
+     * Test the depth the array.
      */
     public function testReferencedArray()
     {
@@ -178,7 +179,7 @@ class ArrayUtilsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test if all keys are present in haystack
+     * Test if all keys are present in haystack.
      */
     public function testHasAllKeys()
     {
@@ -189,7 +190,7 @@ class ArrayUtilsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test if any key is present in haystack
+     * Test if any key is present in haystack.
      */
     public function testHasAnyKeys()
     {
@@ -200,25 +201,25 @@ class ArrayUtilsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test if any key is present in haystack
+     * Test if any key is present in haystack.
      */
     public function testFillMissingKeys()
     {
         $start = 1;
         $end = 12;
-        $middle = (int)floor($end / 2);
+        $middle = (int) floor($end / 2);
 
         $testArray = [
-            $start => (string)$start,
-            $middle => (string)$middle,
-            $end => (string)$end,
+            $start => (string) $start,
+            $middle => (string) $middle,
+            $end => (string) $end,
         ];
 
         $result = ArrayUtils::fillMissingKeys($testArray);
 
         self::assertCount($end - $start + 1, $result);
         self::assertCount($middle, array_slice($result, $middle, null, true));
-        self::assertEquals($result[$middle], (string)$testArray[$middle]);
+        self::assertEquals($result[$middle], (string) $testArray[$middle]);
 
         reset($result);
         self::assertEquals($start, current($result));
@@ -227,7 +228,7 @@ class ArrayUtilsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * testAssociativeArrayIsNotFilledWithKeys
+     * testAssociativeArrayIsNotFilledWithKeys.
      */
     public function testAssociativeArrayIsNotFilledWithKeys()
     {
@@ -245,7 +246,7 @@ class ArrayUtilsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * testEmptyArrayIsNotFilled
+     * testEmptyArrayIsNotFilled.
      */
     public function testEmptyArrayIsNotFilled()
     {
@@ -254,17 +255,12 @@ class ArrayUtilsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Setup beforeClass
+     * Setup beforeClass.
      */
     public static function setupBeforeClass()
     {
-        // create a new factory muffin instance
         static::$fm = new FactoryMuffin();
-
-        // load your model definitions
         static::$fm->loadFactories(__DIR__ . '/Factories');
-
-        // you can optionally set the faker locale
-        Faker::setLocale('nl_NL');
+        Faker::instance()->setLocale('nl_NL');
     }
 }

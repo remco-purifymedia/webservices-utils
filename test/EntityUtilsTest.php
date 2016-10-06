@@ -22,14 +22,9 @@ class EntityUtilsTest extends \PHPUnit_Framework_TestCase
      */
     public static function setupBeforeClass()
     {
-        // create a new factory muffin instance
         static::$fm = new FactoryMuffin();
-
-        // load your model definitions
         static::$fm->loadFactories(__DIR__ . '/Factories');
-
-        // you can optionally set the faker locale
-        Faker::setLocale('nl_NL');
+        Faker::instance()->setLocale('nl_NL');
     }
 
     /**
@@ -50,7 +45,7 @@ class EntityUtilsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * test class without getter
+     * test class without getter.
      */
     public function testEntityWithoutGetters()
     {
@@ -73,7 +68,7 @@ class EntityUtilsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * test the setters
+     * test the setters.
      */
     public function testEntitySetter()
     {
@@ -103,7 +98,7 @@ class EntityUtilsTest extends \PHPUnit_Framework_TestCase
     {
         // create a new factory muffin instance
         $fm = new FactoryMuffin();
-        $fm->loadFactories(__DIR__ . '/Factories');
+        $fm->loadFactories(__DIR__ . '/factories');
 
         // you can optionally set the faker locale
         Faker::setLocale('nl_NL');
