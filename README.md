@@ -12,9 +12,12 @@ Webservices.nl helper library with static helper functions for:
 
 Please add static helper functions that you feel are handy.
 
+## Requirements
+- php version 5.4 or higher
+- php-mbstring / iconv installed
 
 ## License
 MIT
 
 ## Version
-Latest version 0.0.1
+Latest version 0.0.2

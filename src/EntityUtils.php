@@ -14,6 +14,7 @@ class EntityUtils
      * @param string $property
      *
      * @return mixed
+     *
      * @throws \InvalidArgumentException
      */
     public static function extractValueFromEntity($entity, $property)

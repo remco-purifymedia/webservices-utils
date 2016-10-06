@@ -7,7 +7,7 @@ use League\FactoryMuffin\Faker\Facade as Faker;
 use WebservicesNl\Utils\JsonUtils;
 
 /**
- * Class JsonUtilsTest
+ * Class JsonUtilsTest.
  */
 class JsonUtilsTest extends \PHPUnit_Framework_TestCase
 {
@@ -17,22 +17,17 @@ class JsonUtilsTest extends \PHPUnit_Framework_TestCase
     protected static $fm;
 
     /**
-     * Setup beforeClass
+     * Setup beforeClass.
      */
     public static function setupBeforeClass()
     {
-        // create a new factory muffin instance
         static::$fm = new FactoryMuffin();
-
-        // load your model definitions
         static::$fm->loadFactories(__DIR__ . '/Factories');
-
-        // you can optionally set the faker locale
-        Faker::setLocale('nl_NL');
+        Faker::instance()->setLocale('nl_NL');
     }
 
     /**
-     * Test round trip array
+     * Test round trip array.
      */
     public function testRoundTripArray()
     {
@@ -47,7 +42,7 @@ class JsonUtilsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test not a string
+     * Test not a string.
      *
      * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage Argument json is not a string

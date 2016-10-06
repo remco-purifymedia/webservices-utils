@@ -1,10 +1,11 @@
 <?php
 
-namespace WebservicesNl\Utils\test;
+namespace WebservicesNl\Utils\Test;
 
 use League\FactoryMuffin\FactoryMuffin;
 use League\FactoryMuffin\Faker\Facade as Faker;
 use WebservicesNl\Utils\EntityUtils;
+use WebservicesNl\Utils\Test\Entities\DummyClass;
 use WebservicesNl\Utils\Test\Entities\SomeClass;
 
 /**
@@ -22,22 +23,17 @@ class EntityUtilsTest extends \PHPUnit_Framework_TestCase
      */
     public static function setupBeforeClass()
     {
-        // create a new factory muffin instance
         static::$fm = new FactoryMuffin();
-
-        // load your model definitions
         static::$fm->loadFactories(__DIR__ . '/Factories');
-
-        // you can optionally set the faker locale
-        Faker::setLocale('nl_NL');
+        Faker::instance()->setLocale('nl_NL');
     }
 
     /**
-     * @param array $entity
+     * @param DummyClass $entity
      *
      * @dataProvider getEntities
      */
-    public function testEntityGetter($entity)
+    public function testEntityGetter(DummyClass $entity)
     {
         $properties = array_keys($entity->toArray());
 
@@ -50,7 +46,7 @@ class EntityUtilsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * test class without getter
+     * test class without getter.
      */
     public function testEntityWithoutGetters()
     {
@@ -73,7 +69,7 @@ class EntityUtilsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * test the setters
+     * Test the setters.
      */
     public function testEntitySetter()
     {
@@ -101,12 +97,10 @@ class EntityUtilsTest extends \PHPUnit_Framework_TestCase
      */
     public function getEntities()
     {
-        // create a new factory muffin instance
+        // create a new factory muffin instance (data provider is called before setupBeforeClass)
         $fm = new FactoryMuffin();
         $fm->loadFactories(__DIR__ . '/Factories');
-
-        // you can optionally set the faker locale
-        Faker::setLocale('nl_NL');
+        Faker::instance()->setLocale('nl_NL');
 
         return [
             [$fm->instance('WebservicesNl\Utils\Test\Entities\Project')],

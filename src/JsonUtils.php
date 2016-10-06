@@ -41,7 +41,7 @@ class JsonUtils
         if (!is_string($json)) {
             throw new \InvalidArgumentException('Argument json is not a string');
         }
-        $result = json_decode($json, (bool)$assoc, 512, (int)$options);
+        $result = json_decode($json, (bool) $assoc, 512, (int) $options);
         if ($result === null) {
             throw new \RuntimeException(static::$errorMessages[json_last_error()]);
         }
@@ -58,6 +58,7 @@ class JsonUtils
      * @return string
      *
      * @throws \RuntimeException
+     *
      * @link http://php.net/manual/en/function.json-encode.php
      */
     public static function encode($value, $options = 0)

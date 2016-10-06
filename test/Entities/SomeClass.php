@@ -1,6 +1,6 @@
 <?php
 
-namespace WebservicesNl\Utils\test\Entities;
+namespace WebservicesNl\Utils\Test\Entities;
 
 /**
  * Class SomeClass.
