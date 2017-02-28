@@ -24,7 +24,7 @@ class FileSignatureUtils
      *
      * @return bool
      */
-    public static function hasSignature(string $string, string $signature): bool
+    public static function hasSignature($string, $signature)
     {
         if (ctype_xdigit($signature) === false) {
             throw new \InvalidArgumentException(sprintf('Invalid HEX signature provided: %s', $signature));
