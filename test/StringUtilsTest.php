@@ -109,7 +109,7 @@ class StringUtilsTest extends \PHPUnit_Framework_TestCase
                 'original' => 'this is just a string 123',
                 'startsWith' => 'this is',
                 'endsWith' => 'string 123',
-                'underscored' => 'this_is_just_a_string_123',
+                'underscored' => 'this_is_just_a_string_1_2_3',
                 'camelCased' => 'ThisIsJustAString123'
             ]],
             [[

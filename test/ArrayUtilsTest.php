@@ -246,6 +246,37 @@ class ArrayUtilsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     *
+     */
+    public function testArrayToUnderScored()
+    {
+        $mixed = [
+            'bla' => new \stdClass(),
+            'ThisIsAKey' => 'thisisavalue',
+            'thisIsAnotherKey' => ['child1OrSomething' => 'child1value', 'child21OrSomething' => 'child2value'],
+        ];
+
+        $mixed = ArrayUtils::toUnderScore($mixed);
+
+        static::assertEquals('bla', key($mixed));
+        next($mixed);
+        static::assertEquals('this_is_a_key', key($mixed));
+        next($mixed);
+        static::assertEquals('this_is_another_key', key($mixed));
+    }
+
+    /**
+     *
+     */
+    public function testArrayToUnderScoredNumericalArray()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Not a string');
+
+        ArrayUtils::toUnderScore([new \stdClass()]);
+    }
+
+    /**
      * testEmptyArrayIsNotFilled.
      */
     public function testEmptyArrayIsNotFilled()

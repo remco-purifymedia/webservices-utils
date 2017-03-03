@@ -248,4 +248,29 @@ class ArrayUtils
 
         return false;
     }
+
+    /**
+     * Convert an array to camelcased key version
+     *
+     * @param array $array
+     *
+     * @throws \InvalidArgumentException
+     * @throws \Ddeboer\Transcoder\Exception\UnsupportedEncodingException
+     * @throws \Ddeboer\Transcoder\Exception\ExtensionMissingException
+     *
+     * @return array
+     */
+    public static function toUnderScore(array $array = [])
+    {
+        $output = [];
+        foreach ($array as $key => $value) {
+            $key = StringUtils::toUnderscore($key);
+            if (is_array($value)) {
+                $value = static::toUnderScore($value);
+            }
+            $output[$key] = $value;
+        }
+
+        return $output;
+    }
 }

@@ -139,9 +139,9 @@ class StringUtils
                     '~[^a-z^\d]+~i',
                     '_',
                     preg_replace(
-                        '~([a-z])([A-Z])~',
+                        '~([a-z\d])([A-Z]|\d)~',
                         '\1_\2',
-                        preg_replace('~([A-Z]+)([A-Z][a-z])~', '\1_\2', $word)
+                        preg_replace('~([A-Z]|\d+)([A-Z][a-z]|\d)~', '\1_\2', $word)
                     )
                 ),
                 '_'
