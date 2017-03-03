@@ -138,6 +138,18 @@ class StringUtilsTest extends \PHPUnit_Framework_TestCase
                 'endsWith' => 'not lie',
                 'underscored' => 'i_like_camel_case_and_cannot_lie',
                 'camelCased' => 'ILikeCamelCaseAndCannotLie',
+            ]], [[
+                'original' => '12_3_4_56',
+                'startsWith' => '12_3_',
+                'endsWith' => '4_56',
+                'underscored' => '12_3_4_56',
+                'camelCased' => '123456',
+            ]], [[
+                'original' => '__-__',
+                'startsWith' => '__-',
+                'endsWith' => '-__',
+                'underscored' => '',
+                'camelCased' => '-',
             ]],
         ];
     }
