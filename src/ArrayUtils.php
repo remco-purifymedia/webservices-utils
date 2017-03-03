@@ -260,13 +260,13 @@ class ArrayUtils
      *
      * @return array
      */
-    public static function toUnderScore(array $array = [])
+    public static function toUnderscore(array $array = [])
     {
         $output = [];
         foreach ($array as $key => $value) {
             $key = StringUtils::toUnderscore($key);
             if (is_array($value)) {
-                $value = static::toUnderScore($value);
+                $value = static::toUnderscore($value);
             }
             $output[$key] = $value;
         }

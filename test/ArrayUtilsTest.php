@@ -256,7 +256,7 @@ class ArrayUtilsTest extends \PHPUnit_Framework_TestCase
             'thisIsAnotherKey' => ['child1OrSomething' => 'child1value', 'child21OrSomething' => 'child2value'],
         ];
 
-        $mixed = ArrayUtils::toUnderScore($mixed);
+        $mixed = ArrayUtils::toUnderscore($mixed);
 
         static::assertEquals('bla', key($mixed));
         next($mixed);
@@ -273,7 +273,7 @@ class ArrayUtilsTest extends \PHPUnit_Framework_TestCase
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Not a string');
 
-        ArrayUtils::toUnderScore([new \stdClass()]);
+        ArrayUtils::toUnderscore([new \stdClass()]);
     }
 
     /**
