@@ -3,7 +3,7 @@
 namespace WebservicesNl\Utils;
 
 /**
- * Class FileSignatureUtil
+ * Class FileSignatureUtils
  */
 class FileSignatureUtils
 {
