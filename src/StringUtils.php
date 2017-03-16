@@ -13,9 +13,9 @@ class StringUtils
      * @param string $filename
      * @param bool   $lowercase
      *
-     * @return string
-     *
      * @throws \InvalidArgumentException
+     *
+     * @return string
      */
     public static function getFileExtension($filename, $lowercase = true)
     {
@@ -33,9 +33,9 @@ class StringUtils
      * @param string $haystack
      * @param string $needle
      *
-     * @return bool
-     *
      * @throws \InvalidArgumentException
+     *
+     * @return bool
      */
     public static function stringEndsWith($haystack, $needle)
     {
@@ -52,9 +52,9 @@ class StringUtils
      * @param string $haystack
      * @param string $needle
      *
-     * @return bool
-     *
      * @throws \InvalidArgumentException
+     *
+     * @return bool
      */
     public static function stringStartsWith($haystack, $needle)
     {
@@ -71,9 +71,9 @@ class StringUtils
      * @param string $haystack
      * @param string $prefix
      *
-     * @return string
-     *
      * @throws \InvalidArgumentException
+     *
+     * @return string
      */
     public static function removePrefix($haystack, $prefix)
     {
@@ -94,11 +94,11 @@ class StringUtils
      * @param string $string        The string to convert
      * @param bool   $firstCharCaps camelCase or CamelCase
      *
-     * @return string The converted string
-     *
      * @throws \Ddeboer\Transcoder\Exception\UnsupportedEncodingException
      * @throws \Ddeboer\Transcoder\Exception\ExtensionMissingException
      * @throws \InvalidArgumentException
+     *
+     * @return string The converted string
      */
     public static function toCamelCase($string, $firstCharCaps = true)
     {
@@ -121,9 +121,9 @@ class StringUtils
      *
      * @param string $word
      *
-     * @return string
-     *
      * @throws \InvalidArgumentException
+     *
+     * @return string
      */
     private static function wordToUnderscored($word)
     {
@@ -149,11 +149,11 @@ class StringUtils
      *
      * @param string $string
      *
-     * @return string
-     *
      * @throws \Ddeboer\Transcoder\Exception\UnsupportedEncodingException
      * @throws \Ddeboer\Transcoder\Exception\ExtensionMissingException
      * @throws \InvalidArgumentException
+     *
+     * @return string
      */
     public static function toUnderscore($string)
     {

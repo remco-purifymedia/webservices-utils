@@ -13,9 +13,9 @@ class EntityUtils
      * @param mixed  $entity
      * @param string $property
      *
-     * @return mixed
-     *
      * @throws \InvalidArgumentException
+     *
+     * @return mixed
      */
     public static function extractValueFromEntity($entity, $property)
     {
@@ -28,9 +28,9 @@ class EntityUtils
      * @param mixed  $entity
      * @param string $property
      *
-     * @return string
-     *
      * @throws \InvalidArgumentException
+     *
+     * @return string
      */
     public static function createGetter($entity, $property)
     {
@@ -68,9 +68,9 @@ class EntityUtils
      * @param mixed  $entity
      * @param string $property
      *
-     * @return string
-     *
      * @throws \InvalidArgumentException
+     *
+     * @return string
      */
     public static function createSetter($entity, $property)
     {

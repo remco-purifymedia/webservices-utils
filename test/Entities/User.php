@@ -122,7 +122,7 @@ class User extends DummyClass
             'email' => $this->email,
             'firstName' => $this->firstName,
             'lastName' => $this->lastName,
-            'title' => $this->title
+            'title' => $this->title,
         ];
     }
 }

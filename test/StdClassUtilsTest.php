@@ -4,12 +4,9 @@ namespace WebservicesNl\Utils;
 
 /**
  * Class StdClassUtilsTest
- *
- * @package WebservicesNl\Utils
  */
 class StdClassUtilsTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testStdClassToArray()
     {
         $subObject = new \stdClass();
@@ -30,8 +27,8 @@ class StdClassUtilsTest extends \PHPUnit_Framework_TestCase
         $object->{'child2'}->{'grandchild3'}->{'child2'} = null;
         $object->{'child2'}->{'grandchild3'}->{'child3'} = true;
 
-        $object->{'pineapple'} = array(1, 2, 3);
-        $object->{'apple'} = array('bla' => 1, 'blop' => 3, 'bleh' => $subObject);
+        $object->{'pineapple'} = [1, 2, 3];
+        $object->{'apple'} = ['bla' => 1, 'blop' => 3, 'bleh' => $subObject];
 
         $array = StdClassUtils::stdClassToArray($object);
 

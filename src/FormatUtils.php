@@ -18,7 +18,7 @@ class FormatUtils
         'binary' => [ // IEC prefixes (binary)
             'mod' => 1024,
             'units' => ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB'],
-        ]
+        ],
     ];
 
     /**
@@ -28,9 +28,9 @@ class FormatUtils
      * @param int              $precision
      * @param string           $format    either binary or decimal
      *
-     * @return string
-     *
      * @throws \InvalidArgumentException
+     *
+     * @return string
      */
     public static function formatBytes($size, $precision = 0, $format = 'decimal')
     {

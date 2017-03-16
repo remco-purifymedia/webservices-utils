@@ -88,7 +88,7 @@ class StringUtilsTest extends \PHPUnit_Framework_TestCase
     public function dataTypes()
     {
         return [
-            [new \DateTime(), 'string'], [[], 'string'], [(bool) 1, 'string'], [new \stdClass(), 'string']
+            [new \DateTime(), 'string'], [[], 'string'], [(bool) 1, 'string'], [new \stdClass(), 'string'],
         ];
     }
 
@@ -103,21 +103,21 @@ class StringUtilsTest extends \PHPUnit_Framework_TestCase
                 'startsWith' => 'RussianGirls',
                 'endsWith' => 'WhatchaWannaDrink?!',
                 'underscored' => 'russian_girls_hey_whatcha_wanna_drink',
-                'camelCased' => 'RussianGirlsHeyWhatchaWannaDrink?!'
+                'camelCased' => 'RussianGirlsHeyWhatchaWannaDrink?!',
             ]],
             [[
                 'original' => 'this is just a string 123',
                 'startsWith' => 'this is',
                 'endsWith' => 'string 123',
                 'underscored' => 'this_is_just_a_string_123',
-                'camelCased' => 'ThisIsJustAString123'
+                'camelCased' => 'ThisIsJustAString123',
             ]],
             [[
                 'original' => '__funny__case__',
                 'startsWith' => '__funny',
                 'endsWith' => '__case__',
                 'underscored' => 'funny_case',
-                'camelCased' => 'FunnyCase'
+                'camelCased' => 'FunnyCase',
             ]],
             [[
                 'original' => 'A strange string to pass, maybe with some ø, æ, Ë, ë, å characters',
@@ -239,7 +239,7 @@ class StringUtilsTest extends \PHPUnit_Framework_TestCase
             ['folder1/folder2/file.BMP', 'bmp'],
             ['folder1/folder2/file.part2.abc', 'abc'],
             ['file.12345', '12345'],
-            ['filename', '']
+            ['filename', ''],
         ];
     }
 
@@ -253,7 +253,7 @@ class StringUtilsTest extends \PHPUnit_Framework_TestCase
             [1234],
             [new \stdClass()],
             [true],
-            [-6.5]
+            [-6.5],
         ];
     }
 }

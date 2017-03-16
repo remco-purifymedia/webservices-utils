@@ -44,6 +44,7 @@ class ArrayUtilsTest extends \PHPUnit_Framework_TestCase
             }
             self::assertContains($value, $array);
         }
+
         return true;
     }
 
@@ -87,19 +88,19 @@ class ArrayUtilsTest extends \PHPUnit_Framework_TestCase
     {
         $countArrays[] = [
             'depth' => 4,
-            'value' => static::$fm->instance('WebservicesNl\Utils\Test\Entities\Project')->toArray()
+            'value' => static::$fm->instance('WebservicesNl\Utils\Test\Entities\Project')->toArray(),
         ];
         $countArrays[] = [
             'depth' => 3,
-            'value' => static::$fm->instance('WebservicesNl\Utils\Test\Entities\User')->toArray()
+            'value' => static::$fm->instance('WebservicesNl\Utils\Test\Entities\User')->toArray(),
         ];
         $countArrays[] = [
             'depth' => 2,
-            'value' => static::$fm->instance('WebservicesNl\Utils\Test\Entities\Address')->toArray()
+            'value' => static::$fm->instance('WebservicesNl\Utils\Test\Entities\Address')->toArray(),
         ];
         $countArrays[] = [
             'depth' => 1,
-            'value' => static::$fm->instance('WebservicesNl\Utils\Test\Entities\Geocode')->toArray()
+            'value' => static::$fm->instance('WebservicesNl\Utils\Test\Entities\Geocode')->toArray(),
         ];
 
         foreach ($countArrays as $item) {
@@ -235,7 +236,7 @@ class ArrayUtilsTest extends \PHPUnit_Framework_TestCase
         $associative = [
             'bla' => 'green',
             'green' => 'bla',
-            3, 4
+            3, 4,
         ];
         // test empty array
         self::assertEquals(
@@ -245,9 +246,6 @@ class ArrayUtilsTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    /**
-     *
-     */
     public function testArrayToUnderScored()
     {
         $mixed = [
@@ -265,9 +263,6 @@ class ArrayUtilsTest extends \PHPUnit_Framework_TestCase
         static::assertEquals('this_is_another_key', key($mixed));
     }
 
-    /**
-     *
-     */
     public function testArrayToUnderScoredNumericalArray()
     {
         $this->expectException(\InvalidArgumentException::class);

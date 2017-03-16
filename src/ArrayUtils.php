@@ -51,7 +51,7 @@ class ArrayUtils
         end($array);
         $max = key($array);
 
-        for ($i = $min; $i < $max; $i++) {
+        for ($i = $min; $i < $max; ++$i) {
             if (array_key_exists($i, $array) === false) {
                 $array[$i] = $value;
             }
@@ -92,7 +92,7 @@ class ArrayUtils
         $resultArray = [];
         foreach ($array as $key => $val) {
             if (is_array($val)) {
-                /** @noinspection AdditionOperationOnArraysInspection */
+                /* @noinspection AdditionOperationOnArraysInspection */
                 $resultArray += self::prefixArray(self::flattenArray($val), $key, $separator);
             } else {
                 $resultArray[$key] = $val;
@@ -153,10 +153,10 @@ class ArrayUtils
      * @param array $array
      * @param bool  $deReference deReference should the array values be de-referenced first?
      *
-     * @return int
-     *
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
+     *
+     * @return int
      */
     public static function calculateArrayDepth(array $array, $deReference = false)
     {

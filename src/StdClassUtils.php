@@ -14,7 +14,7 @@ class StdClassUtils
      */
     public static function stdClassToArray(\stdClass $object)
     {
-        $object = (array)$object;
+        $object = (array) $object;
         foreach ($object as &$value) {
             if ($value instanceof \stdClass) {
                 $value = self::stdClassToArray($value);
