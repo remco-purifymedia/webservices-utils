@@ -55,9 +55,9 @@ class JsonUtils
      * @param mixed $value
      * @param int   $options [optional]
      *
-     * @return string
-     *
      * @throws \RuntimeException
+     *
+     * @return string
      *
      * @link http://php.net/manual/en/function.json-encode.php
      */

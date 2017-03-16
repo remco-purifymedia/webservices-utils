@@ -188,7 +188,7 @@ class Address extends DummyClass
             'postcode' => $this->postcode,
             'streetName' => $this->streetName,
             'streetSuffix' => $this->streetSuffix,
-            'valid' => (bool) $this->isValid()
+            'valid' => (bool) $this->isValid(),
         ];
     }
 }

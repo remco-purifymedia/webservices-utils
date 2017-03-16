@@ -49,7 +49,7 @@ class JsonUtilsTest extends \PHPUnit_Framework_TestCase
      */
     public function testNotAStringArgument()
     {
-        /** @var \WebservicesNl\Utils\Test\Entities\Project $project */
+        /* @var \WebservicesNl\Utils\Test\Entities\Project $project */
         JsonUtils::decode([]);
     }
 
@@ -61,7 +61,7 @@ class JsonUtilsTest extends \PHPUnit_Framework_TestCase
      */
     public function testDecodeBadSyntaxStringArgument()
     {
-        /** @var \WebservicesNl\Utils\Test\Entities\Project $project */
+        /* @var \WebservicesNl\Utils\Test\Entities\Project $project */
         JsonUtils::decode('"key":"a quoted "value" "');
     }
 
@@ -73,7 +73,7 @@ class JsonUtilsTest extends \PHPUnit_Framework_TestCase
      */
     public function testDecodeMalformedStringArgument()
     {
-        /** @var \WebservicesNl\Utils\Test\Entities\Project $project */
+        /* @var \WebservicesNl\Utils\Test\Entities\Project $project */
         JsonUtils::decode("\xB1\x31");
     }
 }

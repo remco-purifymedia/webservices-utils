@@ -144,7 +144,7 @@ class Project extends DummyClass
             'description' => $this->description,
             'name' => $this->name,
             'user' => ($this->user === null) ? null : $this->user->toArray(),
-            'website' => $this->website
+            'website' => $this->website,
         ];
     }
 }
