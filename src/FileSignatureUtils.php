@@ -18,7 +18,7 @@ class FileSignatureUtils
      * Determine whether the given string contains one of the registered signatures
      *
      * @param string $string    the string data to check
-     * @param string $signature
+     * @param string $signature the hex signature
      *
      * @throws \InvalidArgumentException
      *
