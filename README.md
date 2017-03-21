@@ -1,6 +1,6 @@
 # WebservicesNL Utils Library
 
-> Webservices Utils library with all purpose functions (array, string, entity, json, formatter)
+> Webservices Utils library with all purpose functions (array, string, entity, json, formatter, stdClass, file type hex)
 
 ## Introduction
 Webservices.nl helper library with static helper functions for:
@@ -9,11 +9,14 @@ Webservices.nl helper library with static helper functions for:
 - Entities
 - String
 - Formatter
+- StdClass
+- Filetype hex signature checker
 
-Please add static helper functions that you feel are handy.
+###
+Please add static helper functions that you feel are useful.
 
 ## Requirements
-- php version 5.4 or higher
+- php version 5.6 or higher
 - php-mbstring / iconv installed
 
 ## License
