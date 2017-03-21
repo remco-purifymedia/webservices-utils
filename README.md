@@ -26,4 +26,4 @@ Please add static helper functions that you feel are useful.
 MIT
 
 ## Version
-Latest version 0.0.2
+Latest version 1.0.4
