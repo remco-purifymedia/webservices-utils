@@ -20,7 +20,10 @@
     "gitlab-domains": [
       "gitlab.fdmg.org"
     ],
-    "preferred-install": "dist"
+    "preferred-install": "dist",
+    "allow-plugins": {
+      "phpro/grumphp": true
+    }
   },
   "require": {
     "php": "*",
@@ -28,9 +31,9 @@
     "ddeboer/transcoder": "^1.0"
   },
   "require-dev": {
-    "phpunit/phpunit": "^5",
-    "phpro/grumphp": "^0.8.0",
-    "friendsofphp/php-cs-fixer": "^1",
+    "phpunit/phpunit": "*",
+    "phpro/grumphp": "*",
+    "friendsofphp/php-cs-fixer": "*",
     "league/factory-muffin-faker": "^2.0",
     "league/factory-muffin": "^3.0"
   },
